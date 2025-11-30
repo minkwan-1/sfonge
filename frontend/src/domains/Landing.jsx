@@ -4,6 +4,7 @@ import {
   HeroSection,
   AboutSection,
   FeaturesSection,
+  HowItWorksSection,
 } from "../components/landing";
 
 const Landing = () => {
@@ -12,6 +13,7 @@ const Landing = () => {
       <HeroSection />
       <AboutSection />
       <FeaturesSection />
+      <HowItWorksSection />
     </PageContainer>
   );
 };

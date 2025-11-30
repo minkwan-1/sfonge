@@ -33,7 +33,6 @@ const AboutSection = () => {
       sx={{
         py: { xs: 10, md: 16 },
         px: 3,
-        border: "1px solid red",
         background: "linear-gradient(to bottom right, #fafafa, #ffffff)",
       }}
     >

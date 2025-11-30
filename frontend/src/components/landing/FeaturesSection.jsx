@@ -36,7 +36,6 @@ const FeaturesSection = () => {
       sx={{
         py: { xs: 10, md: 16 },
         px: 3,
-        border: "1px solid blue",
       }}
     >
       <Box sx={{ maxWidth: "1200px", mx: "auto" }}>
