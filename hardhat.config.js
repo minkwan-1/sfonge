@@ -1,4 +1,3 @@
-// hardhat 정상 동작 확인
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
