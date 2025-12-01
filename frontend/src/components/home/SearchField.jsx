@@ -6,7 +6,7 @@ const SearchField = ({ searchTerm, setSearchTerm }) => {
   return (
     <TextField
       fullWidth
-      placeholder="Search projects by title, description, or category..."
+      placeholder="마음에 드는 스타트업 프로젝트를 찾아봐요!"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
       InputProps={{
