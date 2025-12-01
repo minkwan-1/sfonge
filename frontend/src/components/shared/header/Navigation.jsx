@@ -2,26 +2,11 @@ import React from "react";
 import { Button, Box } from "@mui/material";
 import { useGoHome } from "../../landing/hooks/useGoHome";
 
-const navItems = [{ label: "프로젝트 소개", id: "about" }];
-
 const Navigation = () => {
   const goHome = useGoHome();
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-      {navItems.map((item) => (
-        <Button
-          key={item.id}
-          sx={{
-            color: "grey.700",
-            fontWeight: "medium",
-            textTransform: "none",
-            "&:hover": { color: "black", backgroundColor: "transparent" },
-          }}
-        >
-          {item.label}
-        </Button>
-      ))}
+    <Box sx={{ display: "flex", alignItems: "center" }}>
       <Button
         variant="contained"
         disableElevation

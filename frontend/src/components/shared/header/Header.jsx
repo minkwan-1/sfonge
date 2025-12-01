@@ -14,6 +14,7 @@ const Header = () => {
         boxShadow: "none",
         zIndex: 999,
         justifyContent: "center",
+        px: { xs: 3, sm: 2, md: 1 },
       }}
     >
       <Box
