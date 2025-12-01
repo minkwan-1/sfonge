@@ -8,6 +8,7 @@ const Logo = () => {
 
   const goLanding = () => {
     navigate("/");
+    window.scrollTo(0, 0);
   };
 
   return (
