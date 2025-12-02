@@ -77,7 +77,7 @@ const CreateProjectPage = () => {
 
   return (
     <PageContainer>
-      <ComponentWrapper sx={{ mt: 15, mb: 15 }}>
+      <ComponentWrapper sx={{ mt: 15, mb: 15, px: { xs: 3, sm: 2, md: 1 } }}>
         <Typography variant="h5" fontWeight="bold" mb={2}>
           프로젝트 등록
         </Typography>

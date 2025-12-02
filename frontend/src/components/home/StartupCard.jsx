@@ -184,7 +184,7 @@ const StartupCard = ({ startup, connected }) => {
             color="grey.500"
             sx={{ fontFamily: "monospace" }}
           >
-            {startup.owner}
+            {startup.founder}
           </Typography>
 
           <Box sx={{ display: "flex", gap: 1 }}>
