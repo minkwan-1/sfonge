@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
   Button,
   LinearProgress,
   useTheme,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import GroupIcon from "@mui/icons-material/Group";
 import SportsScoreIcon from "@mui/icons-material/SportsScore";
+import { investInProject } from "../../utils/contract-interactions";
 
 const ProgressBar = ({ goal, raised, progress, investors }) => (
   <Box sx={{ width: "100%", mb: 2 }}>
@@ -65,6 +71,37 @@ const ProgressBar = ({ goal, raised, progress, investors }) => (
 
 const StartupCard = ({ startup, connected }) => {
   const theme = useTheme();
+  const [openInvestDialog, setOpenInvestDialog] = useState(false);
+  const [investAmount, setInvestAmount] = useState("");
+  const [isInvesting, setIsInvesting] = useState(false);
+
+  const handleInvestClick = () => {
+    setOpenInvestDialog(true);
+  };
+
+  const handleInvestConfirm = async () => {
+    if (!investAmount || parseFloat(investAmount) <= 0) {
+      alert("올바른 투자 금액을 입력해주세요.");
+      return;
+    }
+
+    setIsInvesting(true);
+    try {
+      await investInProject(startup.id, investAmount);
+      alert(`${investAmount} ETH 투자가 완료되었습니다!`);
+      setOpenInvestDialog(false);
+      setInvestAmount("");
+    } catch (error) {
+      alert(error.message || "투자에 실패했습니다.");
+    } finally {
+      setIsInvesting(false);
+    }
+  };
+
+  const handleInvestCancel = () => {
+    setOpenInvestDialog(false);
+    setInvestAmount("");
+  };
 
   return (
     <Box
@@ -174,6 +211,7 @@ const StartupCard = ({ startup, connected }) => {
               disabled={!connected}
               variant="contained"
               disableElevation
+              onClick={handleInvestClick}
               sx={{
                 gap: 0.5,
                 px: 2,
@@ -194,6 +232,81 @@ const StartupCard = ({ startup, connected }) => {
           </Box>
         </Box>
       </Box>
+
+      <Dialog open={openInvestDialog} onClose={handleInvestCancel}>
+        <DialogTitle sx={{ fontWeight: "bold", color: "grey.800" }}>
+          프로젝트에 투자하기
+        </DialogTitle>
+        <DialogContent>
+          <Box sx={{ pt: 2 }}>
+            <Typography variant="body2" color="grey.700" mb={2}>
+              {startup.title}에 투자할 금액을 입력하세요(ETH)
+            </Typography>
+            <TextField
+              autoFocus
+              fullWidth
+              label="투자 금액 (ETH)"
+              type="number"
+              value={investAmount}
+              onChange={(e) => setInvestAmount(e.target.value)}
+              inputProps={{ step: "0.01", min: "0" }}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "12px",
+                  "&.Mui-focused fieldset": {
+                    borderColor: "grey.700",
+                  },
+                },
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused": {
+                    color: "grey.700",
+                  },
+                },
+              }}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button
+            onClick={handleInvestCancel}
+            disabled={isInvesting}
+            variant="outlined"
+            disableElevation
+            sx={{
+              gap: 0.5,
+              px: 2,
+              py: 1,
+              borderRadius: "12px",
+              fontSize: "0.875rem",
+              fontWeight: "semibold",
+              textTransform: "none",
+              borderColor: "grey.200",
+              color: "grey.700",
+            }}
+          >
+            취소
+          </Button>
+          <Button
+            onClick={handleInvestConfirm}
+            variant="contained"
+            disabled={isInvesting}
+            disableElevation
+            sx={{
+              gap: 0.5,
+              px: 2,
+              py: 1,
+              borderRadius: "12px",
+              fontSize: "0.875rem",
+              fontWeight: "semibold",
+              textTransform: "none",
+              background: "linear-gradient(to right, #212121, #424242)",
+              color: "white",
+            }}
+          >
+            {isInvesting ? "투자 중..." : "투자하기"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
