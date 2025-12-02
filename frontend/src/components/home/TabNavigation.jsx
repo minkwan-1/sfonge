@@ -63,7 +63,7 @@ const TabNavigation = ({
         disableElevation
         sx={btnStyle(activeTab === "explore")}
       >
-        Explore
+        탐색 모드
       </Button>
 
       <Button
@@ -72,7 +72,7 @@ const TabNavigation = ({
         disableElevation
         sx={btnStyle(activeTab === "search")}
       >
-        Search
+        검색 모드
       </Button>
 
       <Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 2 }}>
@@ -88,7 +88,7 @@ const TabNavigation = ({
             ? "연결 중..."
             : connected
             ? formatAddress(walletAddress)
-            : "Connect Wallet"}
+            : "지갑 연결하기"}
         </Button>
       </Box>
     </Box>

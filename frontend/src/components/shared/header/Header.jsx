@@ -1,8 +1,12 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import { AppBar, Button, Box } from "@mui/material";
 import { Logo, Navigation } from "./index";
 
 const Header = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/home";
+
   return (
     <AppBar
       position="fixed"
@@ -29,7 +33,7 @@ const Header = () => {
       >
         <Logo />
 
-        <Navigation />
+        {!isHomePage && <Navigation />}
       </Box>
     </AppBar>
   );

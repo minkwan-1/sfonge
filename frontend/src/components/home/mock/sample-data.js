@@ -91,7 +91,7 @@ export const SampleData = [
     image: "https://placehold.co/600x400/5a5a5a/ffffff?text=P2P+Energy",
     goal: "50 ETH",
     raised: "55.0 ETH",
-    progress: 110,
+    progress: 19,
     investors: 95,
     category: "Sustainability",
   },

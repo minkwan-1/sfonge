@@ -7,7 +7,7 @@ const HowItWorksSection = () => {
       step: 1,
       title: "지갑 연결",
       description:
-        "MetaMask 등의 Web3 지갑을 연결하고 Monad Testnet으로 전환하세요. 처음이라면 5분이면 충분합니다.",
+        "MetaMask를 연결하고 Monad Testnet으로 전환하세요. 처음이라면 5분이면 충분합니다.",
       hasNextLine: true,
     },
     {
