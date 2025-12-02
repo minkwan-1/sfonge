@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
 import { AppBar, Button, Box, Menu, MenuItem, Typography } from "@mui/material";
 import { useAtom } from "jotai/react";
 import WalletIcon from "@mui/icons-material/Wallet";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Logo, Navigation } from "./index";
+import { Logo } from "./index";
 import { isConnectedAtom, accountAtom } from "../../../store/walletAtom";
 import { connectWallet } from "../../../utils/web3";
 
 const Header = () => {
   const [isConnected, setIsConnected] = useAtom(isConnectedAtom);
   const [account, setAccount] = useAtom(accountAtom);
-  const location = useLocation();
-  const isHomePage = location.pathname === "/home";
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -54,8 +51,8 @@ const Header = () => {
     fontWeight: "semibold",
     textTransform: "none",
     color: "white",
-    py: 1,
-    px: 2,
+    paddingY: 1.25,
+    paddingX: 2.5,
     gap: 1,
   };
 
@@ -102,8 +99,6 @@ const Header = () => {
         <Logo />
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          {!isHomePage && <Navigation />}
-
           {isConnected ? (
             <Button
               variant="contained"
