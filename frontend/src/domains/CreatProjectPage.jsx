@@ -20,10 +20,19 @@ const CreateProjectPage = () => {
     navigate("/home");
   };
 
+  const FOCUS_COLOR = "#424242";
+
   const inputStyle = {
     mb: 3,
     "& .MuiOutlinedInput-root": {
       borderRadius: "12px",
+      "&.Mui-focused fieldset": {
+        borderColor: FOCUS_COLOR,
+        borderWidth: "2px",
+      },
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: FOCUS_COLOR,
     },
   };
 
@@ -55,6 +64,7 @@ const CreateProjectPage = () => {
             fullWidth
             sx={inputStyle}
             required
+            placeholder="우리 팀이 만든 혁신적인 프로젝트의 이름을 알려주세요."
           />
           <TextField
             label="프로젝트 설명"
@@ -65,6 +75,7 @@ const CreateProjectPage = () => {
             rows={4}
             sx={inputStyle}
             required
+            placeholder="프로젝트의 목적, 기대 효과, 핵심 기능을 자세히 적어주시면 좋아요."
           />
           <TextField
             label="목표 금액 (ETH)"
@@ -74,6 +85,8 @@ const CreateProjectPage = () => {
             type="number"
             sx={inputStyle}
             required
+            placeholder="몇 ETH를 모금하고 싶으신가요? (숫자만 입력)"
+            inputProps={{ min: "0" }}
           />
           <TextField
             select
@@ -83,6 +96,7 @@ const CreateProjectPage = () => {
             fullWidth
             sx={inputStyle}
             required
+            placeholder="프로젝트가 어떤 분야에 해당되나요?"
           >
             {categories.map((cat) => (
               <MenuItem key={cat} value={cat}>
