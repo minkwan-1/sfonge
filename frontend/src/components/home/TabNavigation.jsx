@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, useTheme } from "@mui/material";
+import { Box, Button, useTheme, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai/react";
 import { isConnectedAtom } from "../../store/walletAtom";
@@ -26,11 +26,16 @@ const TabNavigation = ({ activeTab, setActiveTab, setSearchTerm }) => {
           color: "grey.600",
           borderColor: "grey.200",
           "&:hover": { bgcolor: "grey.50", borderColor: "grey.300" },
+
+          opacity: !isConnected ? 0.6 : 1,
+          cursor: !isConnected ? "not-allowed" : "pointer",
         }),
   });
 
   const handleCreateProject = () => {
-    navigate("/create-project");
+    if (isConnected) {
+      navigate("/create-project");
+    }
   };
 
   return (
@@ -56,14 +61,27 @@ const TabNavigation = ({ activeTab, setActiveTab, setSearchTerm }) => {
       </Button>
 
       <Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 2 }}>
-        <Button
-          onClick={handleCreateProject}
-          variant="outlined"
-          disabled={!isConnected}
-          sx={{ ...btnStyle(false) }}
+        <Tooltip
+          title="지갑 연결 후 사용 가능해요"
+          disableFocusListener={isConnected}
+          disableHoverListener={isConnected}
+          disableTouchListener={isConnected}
+          arrow
         >
-          프로젝트 생성하기
-        </Button>
+          <Box>
+            <Button
+              onClick={handleCreateProject}
+              variant="outlined"
+              disabled={!isConnected}
+              sx={{
+                ...btnStyle(false),
+                pointerEvents: isConnected ? "auto" : "none",
+              }}
+            >
+              프로젝트 생성하기
+            </Button>
+          </Box>
+        </Tooltip>
       </Box>
     </Box>
   );
