@@ -1,12 +1,24 @@
 import { ethers } from "ethers";
 import { getContract } from "./web3";
 
-export const createProject = async (goalAmount, durationInDays) => {
+export const createProject = async (
+  title,
+  description,
+  category,
+  goalAmount,
+  durationInDays
+) => {
   const contract = await getContract();
   const goalInWei = ethers.parseEther(goalAmount.toString());
   const durationInSeconds = durationInDays * 24 * 60 * 60;
 
-  const tx = await contract.createProject(goalInWei, durationInSeconds);
+  const tx = await contract.createProject(
+    title,
+    description,
+    category,
+    goalInWei,
+    durationInSeconds
+  );
   await tx.wait();
 
   return tx;
